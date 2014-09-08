@@ -2,7 +2,7 @@ FTC7155-2014
 ============
 
 Code for Harvard-Westlake Middle School Robotics Team
-Team FTC7155
+Team FTC8965
 
 2014-2015 First Tech Challenge Season
 
