@@ -27,14 +27,7 @@ Version 1
 Since November 3, 2014
 */
 
-#include "JoystickDriver.c"
-
-#include "drivers/hitechnic-sensormux.h"	// just files to make the SMUX work.
-
-//SMUX prob wont work needs fixes
-const tMUXSensor leftIR = msensor_S3_3;
-const tMUXSensor rightIR = msensor_S3_1;
-const tMUXSensor touch = msensor_S3_2;
+#include "JoystickDriver.c"]
 
 task hook () {
 	//Hook
@@ -138,14 +131,6 @@ task intake () {
 		}
 	}
 }
-task init () {
-	while(true){
-		if(SensorValue[touch]==1){
-			motor[leftLift]=30;
-			motor[rightLift]=-30;
-		}
-	}
-}
 
 task main() { //Main task for code
 
@@ -197,7 +182,7 @@ task main() { //Main task for code
 			motor[leftLift]=100;
 			motor[rightLift]=-100;
 			} else {
-			motor[leftLift] = 0;
+			motor[leftLift] = -0;
 			motor[rightLift] = 0;
 		}
 		displayCenteredBigTextLine(1, "%d, %d", nMotorEncoder[leftLift], nMotorEncoder[rightLift]);
