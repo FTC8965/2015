@@ -6,7 +6,7 @@
 #pragma config(Motor,  motorB,          rightIntake,   tmotorNXT, PIDControl, encoder)
 #pragma config(Motor,  mtr_S1_C1_1,     rightLift,     tmotorTetrix, PIDControl, reversed, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     leftLift,      tmotorTetrix, PIDControl, reversed, encoder)
-#pragma config(Motor,  mtr_S1_C2_1,     leftWheel1,    tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C2_1,     leftWheel1,    tmotorTetrix, openLoop, reversed)
 #pragma config(Motor,  mtr_S1_C2_2,     rightWheel1,   tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S2_C1_1,     leftWheel2,    tmotorTetrix, openLoop, reversed)
 #pragma config(Motor,  mtr_S2_C1_2,     rightWheel2,   tmotorTetrix, openLoop)
@@ -168,12 +168,12 @@ task main() { //Main task for code
 
 
 		//Set left wheels
-		motor[leftWheel1] = joystick.joy1_y1;
-		motor[leftWheel2] = joystick.joy1_y1;
+		motor[leftWheel1] = -joystick.joy1_y1;
+		motor[leftWheel2] = -joystick.joy1_y1;
 
 		//Set right wheels
-		motor[rightWheel1] = joystick.joy1_y2;
-		motor[rightWheel2] = joystick.joy1_y2;
+		motor[rightWheel1] = -joystick.joy1_y2;
+		motor[rightWheel2] = -joystick.joy1_y2;
 
 		if(joy1Btn(Btn5)&& nMotorEncoder[leftLift]>-3700){
 			motor[leftLift]=-127;

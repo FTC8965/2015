@@ -284,7 +284,7 @@ bool writeI2C(tSensors link, tByteArray &request, tByteArray &reply, int replyle
     case sensorI2CCustomFastSkipStates:   break;
     default:
 	    hogCPU();
-	    PlaySound(soundException);
+	    playSound(soundException);
 	    eraseDisplay();
 	    nxtDisplayCenteredTextLine(0, "3rd Party Driver");
 	    nxtDisplayCenteredTextLine(1, "ERROR");
