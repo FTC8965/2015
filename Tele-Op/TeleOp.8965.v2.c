@@ -6,10 +6,15 @@
 #pragma config(Motor,  motorB,          rightIntake,   tmotorNXT, PIDControl, encoder)
 #pragma config(Motor,  mtr_S1_C1_1,     rightLift,     tmotorTetrix, PIDControl, reversed, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     leftLift,      tmotorTetrix, PIDControl, reversed, encoder)
+<<<<<<< HEAD
 #pragma config(Motor,  mtr_S1_C2_1,     leftWheel1,    tmotorTetrix, openLoop, reversed)
 #pragma config(Motor,  mtr_S1_C2_2,     rightWheel1,   tmotorTetrix, openLoop)
+=======
+#pragma config(Motor,  mtr_S1_C2_1,     leftWheel1,    tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C2_2,     rightWheel1,   tmotorTetrix, openLoop, reversed)
+>>>>>>> origin/master
 #pragma config(Motor,  mtr_S2_C1_1,     leftWheel2,    tmotorTetrix, openLoop, reversed)
-#pragma config(Motor,  mtr_S2_C1_2,     rightWheel2,   tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S2_C1_2,     rightWheel2,   tmotorTetrix, openLoop, reversed)
 #pragma config(Servo,  srvo_S2_C2_1,    leftHook,             tServoStandard)
 #pragma config(Servo,  srvo_S2_C2_2,    rightHook,            tServoStandard)
 #pragma config(Servo,  srvo_S2_C2_3,    servo3,               tServoNone)
@@ -27,7 +32,14 @@ Version 1
 Since November 3, 2014
 */
 
-#include "JoystickDriver.c"]
+#include "JoystickDriver.c"
+
+#include "drivers/hitechnic-sensormux.h"	// just files to make the SMUX work.
+
+//SMUX prob wont work needs fixes
+const tMUXSensor leftIR = msensor_S3_3;
+const tMUXSensor rightIR = msensor_S3_1;
+const tMUXSensor touch = msensor_S3_2;
 
 task hook () {
 	//Hook
@@ -131,6 +143,14 @@ task intake () {
 		}
 	}
 }
+task init () {
+	while(true){
+		if(SensorValue[touch]==1){
+			motor[leftLift]=30;
+			motor[rightLift]=-30;
+		}
+	}
+}
 
 task main() { //Main task for code
 
@@ -143,7 +163,7 @@ task main() { //Main task for code
 	motor[rightLift] = 0;
 	*/
 
-	//StartTask(init);
+	//StartTask(init);a
 
 	waitForStart();
 
@@ -168,12 +188,21 @@ task main() { //Main task for code
 
 
 		//Set left wheels
+<<<<<<< HEAD
 		motor[leftWheel1] = -joystick.joy1_y1;
 		motor[leftWheel2] = -joystick.joy1_y1;
 
 		//Set right wheels
 		motor[rightWheel1] = -joystick.joy1_y2;
 		motor[rightWheel2] = -joystick.joy1_y2;
+=======
+		motor[leftWheel1] = joystick.joy1_y2;
+		motor[leftWheel2] = joystick.joy1_y2;
+
+		//Set right wheels
+		motor[rightWheel1] = vjoystick.joy1_y1;
+		motor[rightWheel2] = joystick.joy1_y1;
+>>>>>>> origin/master
 
 		if(joy1Btn(Btn5)&& nMotorEncoder[leftLift]>-3700){
 			motor[leftLift]=-127;
@@ -181,8 +210,8 @@ task main() { //Main task for code
 			} else if(joy1Btn(Btn7) && nMotorEncoder[leftLift]<-10){
 			motor[leftLift]=100;
 			motor[rightLift]=-100;
-			} else {
-			motor[leftLift] = -0;
+			} else {s
+			motor[leftLift] = 0;
 			motor[rightLift] = 0;
 		}
 		displayCenteredBigTextLine(1, "%d, %d", nMotorEncoder[leftLift], nMotorEncoder[rightLift]);
