@@ -163,7 +163,7 @@ task main() { //Main task for code
 	motor[rightLift] = 0;
 	*/
 
-	//StartTask(init);a
+	//StartTask(init);
 
 	waitForStart();
 
